@@ -19,12 +19,20 @@ fetch(url).then(res => res.json().then(res => {
                 <td>${res[key].products[i].description}</td>
                 <td>${res[key].products[i].price}</td>
                 <td>${res[key].products[i].image}</td>
+                <button id = "add"> Add to car </button>
               </tbody>
         </table>
     </div>`;
                 i++;
             }
             space.innerHTML = tableSelected;
+        }
+        const btn = document.getElementById("add");
+        const carrito = document.getElementById("carrito");
+
+        btn.onclick = (items)=>{
+            carrito.innerHTML=items;
+            console.log(carrito);
         }
     });
 
