@@ -9,9 +9,10 @@ fetch(url).then(res => res.json().then(res => {
         const enlace = document.getElementById(res[key].name);
         enlace.onclick = () => {
             let i = 0;
+            let tableSelected = `<h1>${res[key].name}</h1>`;
             while (i < res[key].products.length) {
                 //console.log(res[key].products[i]);
-                let tableSelected = `<h1>${res[key].name}</h1>
+                tableSelected += `
         <table class="table">
               <tbody id ="menutable">
                 <td>${res[key].products[i].name}</td>
@@ -21,9 +22,9 @@ fetch(url).then(res => res.json().then(res => {
               </tbody>
         </table>
     </div>`;
-                space.innerHTML = tableSelected;
                 i++;
             }
+            space.innerHTML = tableSelected;
         }
     });
 
