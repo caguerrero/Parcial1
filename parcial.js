@@ -18,7 +18,7 @@ fetch(url).then(res => res.json().then(res => {
                 <td>${res[key].products[i].name}</td>
                 <td>${res[key].products[i].description}</td>
                 <td>${res[key].products[i].price}</td>
-                <td>${res[key].products[i].image}</td>
+                <td><img src="${res[key].products[i].image}" alt = ${res[key].products[i].name}></img></td>
                 <button id = "add"> Add to car </button>
               </tbody>
         </table>
