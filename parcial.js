@@ -27,13 +27,13 @@ fetch(url).then(res => res.json().then(res => {
             }
             space.innerHTML = tableSelected;
         }
-        const btn = document.getElementById("add");
-        const carrito = document.getElementById("carrito");
+        // const btn = document.getElementById("add");
+        // const carrito = document.getElementById("carrito");
 
-        btn.onclick = (items)=>{
-            carrito.innerHTML=items;
-            console.log(carrito);
-        }
+        // btn.onclick = (items)=>{
+        //     carrito.innerHTML=items;
+        //     console.log(carrito);
+        // }
     });
 
 }));
