@@ -10,7 +10,8 @@ let pedidos = {
     names: [],
     descriptions: [],
     prices: [],
-    amount: []
+    amount: [],
+    quantity: []
 };
 let items = 0;
 const carrito = document.getElementById("carrito");
@@ -28,8 +29,10 @@ function addCart(btn) {
                         pedidos.descriptions.unshift(itemsActuales.descriptions[s]);
                         pedidos.prices.unshift(itemsActuales.prices[s]);
                         pedidos.amount.unshift(itemsActuales.prices[s]);
+                        pedidos.quantity.unshift(1);
                     } else {
                         pedidos.amount[pedidos.names.indexOf(founded)] += pedidos.amount[pedidos.names.indexOf(founded)];
+                        pedidos.quantity[pedidos.names.indexOf(founded)]++;
                     }
                 }
                 s++;
@@ -61,7 +64,7 @@ function actCart(space) {
         prod +=
             `<tr>
             <td>${k + 1}</td>
-            <td>${pedidos.names[k]}</td>
+            <td id = "quantity${pedidos.names[k].replace(/\s/g, '')}">${pedidos.quantity[k]}</td>
             <td>${pedidos.descriptions[k]}</td>
             <td>${pedidos.prices[k]}</td>
             <td id = "amount${pedidos.names[k].replace(/\s/g, '')}">${pedidos.amount[k]}</td>
@@ -76,9 +79,8 @@ function actCart(space) {
     <label id="total"><strong>Total: $ ${total}</strong></label>
     <div id = "buttons">
         <button id="cancel" type="button" class="btn btn-danger"> Cancel </button>
-        <button type="button" class="btn btn btn-light"> Confirm order </button>
-    </div>
-    <label id = "info"><strong>Contact us: +57 3102105253 - info@restaurant.com - @restaurant`
+        <button id="confirm" type="button" class="btn btn btn-light"> Confirm order </button>
+    </div>`
     space.innerHTML = prod;
 }
 
@@ -93,31 +95,38 @@ function change() {
             while (s < pedidos.names.length) {
                 if ("mas" + pedidos.names[s].replace(/\s/g, '') === j.id) {
                     pedidos.amount[s] += pedidos.prices[s];
+                    pedidos.quantity[s]++;
                     const amount = document.getElementById("amount" + pedidos.names[s].replace(/\s/g, ''));
                     amount.innerHTML = parseFloat(pedidos.amount[s].toFixed(2));
+                    const quantity = document.getElementById("quantity" + pedidos.names[s].replace(/\s/g, ''));
+                    quantity.innerHTML = pedidos.quantity[s];
                 }
                 total += parseFloat(pedidos.amount[s].toFixed(2));
                 s++;
             }
-            labelTotal.innerHTML=`<strong>Total: $ ${parseFloat(total.toFixed(2))}</strong>`;
+            labelTotal.innerHTML = `<strong>Total: $ ${parseFloat(total.toFixed(2))}</strong>`;
         };
     }
-    for (let k of btnDiminish){
+    for (let k of btnDiminish) {
         const labelTotal = document.getElementById("total");
         k.onclick = () => {
             let t = 0;
             let total = 0;
             while (t < pedidos.names.length) {
                 if ("menos" + pedidos.names[t].replace(/\s/g, '') === k.id) {
-                    pedidos.amount[t] -= pedidos.prices[t];
+                    if (pedidos.amount[t] > 0) {
+                        pedidos.amount[t] -= pedidos.prices[t];
+                        pedidos.quantity[t]--;
+                    }
                     const amount = document.getElementById("amount" + pedidos.names[t].replace(/\s/g, ''));
                     amount.innerHTML = parseFloat(pedidos.amount[t].toFixed(2));
+                    const quantity = document.getElementById("quantity" + pedidos.names[t].replace(/\s/g, ''));
+                    quantity.innerHTML = pedidos.quantity[t];
                 }
                 total += parseFloat(pedidos.amount[t].toFixed(2));
                 t++;
             }
-            console.log(total);
-            labelTotal.innerHTML=`<strong>Total: $ ${parseFloat(total.toFixed(2))}</strong>`;
+            labelTotal.innerHTML = `<strong>Total: $ ${parseFloat(total.toFixed(2))}</strong>`;
         };
     }
 }
@@ -129,7 +138,7 @@ fetch(url).then(res => res.json().then(res => {
         const imgCarrito = document.getElementById("imgCarrito");
         enlace.onclick = () => {
             let i = 0;
-            let tableSelected = `<h2>${res[key].name}</h2> <div class="row">`;
+            let tableSelected = `<hr /> <h2>${res[key].name}</h2> <hr />`;
             while (i < res[key].products.length) {
                 if (!itemsActuales.names.find(element => element === res[key].products[i].name)) {
                     itemsActuales.names.push(res[key].products[i].name);
@@ -147,19 +156,40 @@ fetch(url).then(res => res.json().then(res => {
             `;
                 i++;
             }
-            tableSelected += "</div>"
             space.innerHTML = tableSelected;
             const btn = document.getElementsByClassName("add");
             addCart(btn);
         }
         imgCarrito.onclick = () => {
             actCart(space);
-            const btnCancel = document.getElementById("cancel");
-            btnCancel.onclick=()=>{
-                bootbox.confirm("Are you sure?", function(result){ 
-                })
-            }
             change();
+            const btnCancel = document.getElementById("cancel");
+            const btnConfirm = document.getElementById("confirm");
+            btnCancel.onclick = () => {
+            };
+            btnConfirm.onclick = () => {
+                confirmed();
+                actCart(space);
+            }
         }
     });
 }));
+
+function confirmed(){
+    for (let index = 0; index < pedidos.names.length; index++) {
+        let obj = {
+            item: index + 1,
+            quantity: pedidos.quantity[index],
+            description: pedidos.descriptions[index],
+            unitPrice: pedidos.prices[index]
+        }
+        console.log(obj);
+    }
+    pedidos.names = [];
+    pedidos.descriptions = [];
+    pedidos.prices = [];
+    pedidos.amount = [];
+    pedidos.quantity = [];
+    items = 0;
+    carrito.innerHTML = items + " items";
+}
