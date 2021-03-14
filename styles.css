@@ -91,7 +91,8 @@ ul {
   margin-top: -30px;
 }
 
-.modMas, .modMenos {
+.modMas,
+.modMenos {
   background-color: #6b767f;
   border-color: transparent;
   border-radius: 2px;
@@ -124,6 +125,7 @@ footer {
 
 .confirm {
   display: none;
+  padding: 20px;
 }
 .confirm > div:first-of-type {
   position: fixed;
@@ -151,4 +153,49 @@ footer {
 }
 .confirm > div:last-of-type div:last-of-type {
   text-align: right;
+}
+
+#confirmYes,
+#confirmNo {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#confirmNo {
+  background-color: #e85358;
+}
+
+#confirmYes {
+  background-color: #f0e7dd;
+}
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  margin-top: -30px;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+
+.close:before {
+  transform: rotate(45deg);
+}
+
+.close:after {
+  transform: rotate(-45deg);
 }

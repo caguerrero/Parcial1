@@ -41,7 +41,8 @@ function addCart(btn) {
     }
 }
 
-function actCart(space) {
+function actCart() {
+    const space = document.getElementById("space");
     let prod =
         `<h2>Order detail</h2> 
                 <table class="table table-striped">
@@ -161,21 +162,23 @@ fetch(url).then(res => res.json().then(res => {
             addCart(btn);
         }
         imgCarrito.onclick = () => {
-            actCart(space);
+            actCart();
             change();
             const btnCancel = document.getElementById("cancel");
             const btnConfirm = document.getElementById("confirm");
             btnCancel.onclick = () => {
+                save();
             };
             btnConfirm.onclick = () => {
-                confirmed();
-                actCart(space);
+                confirmed('conf');
+                actCart();
             }
         }
     });
 }));
 
-function confirmed(){
+function confirmed(type){
+    let array = [];
     for (let index = 0; index < pedidos.names.length; index++) {
         let obj = {
             item: index + 1,
@@ -183,7 +186,10 @@ function confirmed(){
             description: pedidos.descriptions[index],
             unitPrice: pedidos.prices[index]
         }
-        console.log(obj);
+        array.push(obj);
+    }
+    if(type==='conf'){
+        console.log(array);
     }
     pedidos.names = [];
     pedidos.descriptions = [];
@@ -193,3 +199,41 @@ function confirmed(){
     items = 0;
     carrito.innerHTML = items + " items";
 }
+
+const ui = {
+    confirm: async (message) => createConfirm(message)
+}
+  
+  const createConfirm = (message) => {
+    return new Promise((complete, failed)=>{
+      let msg = document.querySelector('#confirmMessage');
+      let mYes = document.querySelector('#confirmYes');
+      let mNo = document.querySelector('#confirmNo');
+      let mClose = document.querySelector('#close');
+      let confirm = document.querySelector('.confirm');
+      msg.innerHTML = message;
+      mYes.onclick = () => {
+        confirm.style.display = 'none';
+        complete(true);
+      }
+
+      mNo.onclick = () => {
+        confirm.style.display = 'none';
+        complete(false);
+      }
+      
+      mClose.onclick = () => {
+        confirm.style.display = 'none';
+        complete(false);
+      }
+      confirm.style.display = 'inline';
+    });
+  }
+                       
+  const save = async () => {
+    const confirm = await ui.confirm('Are you sure about cancelling the order?');
+    if(confirm){
+        confirmed('cancel');
+        actCart();
+    }
+  }

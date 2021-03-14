@@ -68,53 +68,55 @@ ul {
   padding: 10px;
 }
 
-.btn-light{
+.btn-light {
   border-color: black;
   border-style: solid;
   background-color: #f0e7dd;
-  color:black;
+  color: black;
   float: right;
   margin-top: -30px;
 }
-.btn-danger{
+.btn-danger {
   border-color: black;
   border-style: solid;
   background-color: #e85358;
-  color:black;
+  color: black;
   float: right;
   margin-top: -30px;
 }
 
-.modMas, .modMenos{
+.modMas,
+.modMenos {
   background-color: #6b767f;
   border-color: transparent;
   border-radius: 2px;
-  color:white;
+  color: white;
 }
-.modMas{
+.modMas {
   margin-right: 5px;
 }
 
-#buttons{
+#buttons {
   float: right;
 }
-#total{
+#total {
   float: left;
 }
 
-#info{
+#info {
   text-align: center;
   position: relative;
-  margin-left:200px;
+  margin-left: 200px;
   margin-top: 60px;
-  bottom:0;
+  bottom: 0;
 }
-footer{
+footer {
   text-align: center;
 }
 
 .confirm {
   display: none;
+  padding: 20px;
   > div {
     &:first-of-type {
       position: fixed;
@@ -149,4 +151,45 @@ footer{
       }
     }
   }
+}
+
+#confirmYes,
+#confirmNo {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#confirmNo {
+  background-color: #e85358;
+}
+
+#confirmYes {
+  background-color: #f0e7dd;
+}
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+  margin-top: -30px;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }
