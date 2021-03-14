@@ -1,0 +1,119 @@
+$picked-color: #323941;
+
+#img-carrito {
+  width: 200px;
+}
+a {
+  text-decoration: none;
+  padding: 50px;
+}
+
+a:hover {
+  color: black;
+  cursor: pointer;
+}
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+#Restaurant {
+  font-family: "Satisfy", cursive;
+}
+
+#banner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 400px;
+}
+.col-3 {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  img {
+    height: 200px;
+    width: 400px;
+  }
+}
+
+.add {
+  background-color: $picked-color;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+}
+
+#carrito {
+  width: 60px;
+  margin-top: -40px;
+  margin-right: -120px;
+  float: right;
+}
+
+#imgCarrito {
+  width: 50px;
+  margin-top: -50px;
+  margin-bottom: 20px;
+  float: right;
+  cursor: pointer;
+}
+li {
+  float: left;
+  padding: 20px;
+}
+a {
+  display: block;
+  padding: 8px;
+  color: white;
+}
+h2 {
+  text-align: center;
+}
+ul {
+  background-color: $picked-color;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-style: ridge;
+  margin: 5px;
+}
+
+.btn-light{
+  border-color: black;
+  border-style: solid;
+  background-color: #f0e7dd;
+  color:black;
+}
+.btn-danger{
+  border-color: black;
+  border-style: solid;
+  background-color: #e85358;
+  color:black;
+}
+
+.modMas, .modMenos{
+  background-color: #6b767f;
+  border-color: transparent;
+  border-radius: 2px;
+  color:white;
+}
+.modMas{
+  margin-right: 5px;
+}
+
+#buttons{
+  float: right;
+}
+#total{
+  float: left;
+}
+
+#info{
+  text-align: center;
+  position: relative;
+  margin-left:200px;
+  margin-top: 60px;
+  bottom:0;
+}

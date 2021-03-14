@@ -19,5 +19,8 @@
   "homepage": "https://github.com/caguerrero/Parcial1#readme",
   "devDependencies": {
     "eslint": "^7.21.0"
+  },
+  "dependencies": {
+    "bootbox": "^5.5.2"
   }
 }
