@@ -97,6 +97,8 @@ function change() {
                 if ("mas" + pedidos.names[s].replace(/\s/g, '') === j.id) {
                     pedidos.amount[s] += pedidos.prices[s];
                     pedidos.quantity[s]++;
+                    items++;
+                    carrito.innerHTML = items + " items";
                     const amount = document.getElementById("amount" + pedidos.names[s].replace(/\s/g, ''));
                     amount.innerHTML = parseFloat(pedidos.amount[s].toFixed(2));
                     const quantity = document.getElementById("quantity" + pedidos.names[s].replace(/\s/g, ''));
@@ -118,6 +120,8 @@ function change() {
                     if (pedidos.amount[t] > 0) {
                         pedidos.amount[t] -= pedidos.prices[t];
                         pedidos.quantity[t]--;
+                        items--;
+                        carrito.innerHTML = items + " items";
                     }
                     const amount = document.getElementById("amount" + pedidos.names[t].replace(/\s/g, ''));
                     amount.innerHTML = parseFloat(pedidos.amount[t].toFixed(2));
